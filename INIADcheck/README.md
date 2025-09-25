@@ -1,12 +1,65 @@
-# React + Vite
+# INIADcheck
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+複数の時間割JSONファイルをアップロードして、全員が空いているコマを表示するWebアプリケーションです。
 
-Currently, two official plugins are available:
+## 機能
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 複数の時間割JSONファイルを同時にアップロード
+- 全員が空いているコマを自動計算
+- 6限以降の空きコマは除外
+- アップロード済みの時間割の管理（個別削除・全削除）
+- レスポンシブデザイン対応
 
-## Expanding the ESLint configuration
+## 使用方法
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. 時間割JSONファイルを準備
+2. 「ファイルを選択」ボタンから複数のJSONファイルを選択
+3. 2人以上の時間割がアップロードされると、全員が空いているコマが表示されます
+
+## JSONファイルの形式
+
+```json
+{
+  "1": ["月曜日の1限", "火曜日の1限", "水曜日の1限", "木曜日の1限", "金曜日の1限", "土曜日の1限"],
+  "2": ["月曜日の2限", "火曜日の2限", "水曜日の2限", "木曜日の2限", "金曜日の2限", "土曜日の2限"],
+  "3": ["月曜日の3限", "火曜日の3限", "水曜日の3限", "木曜日の3限", "金曜日の3限", "土曜日の3限"],
+  "4": ["月曜日の4限", "火曜日の4限", "水曜日の4限", "木曜日の4限", "金曜日の4限", "土曜日の4限"],
+  "5": ["月曜日の5限", "火曜日の5限", "水曜日の5限", "木曜日の5限", "金曜日の5限", "土曜日の5限"],
+  "6": ["月曜日の6限", "火曜日の6限", "水曜日の6限", "木曜日の6限", "金曜日の6限", "土曜日の6限"],
+  "7": ["月曜日の7限", "火曜日の7限", "水曜日の7限", "木曜日の7限", "金曜日の7限", "土曜日の7限"],
+  "8": ["月曜日の8限", "火曜日の8限", "水曜日の8限", "木曜日の8限", "金曜日の8限", "土曜日の8限"]
+}
+```
+
+- キーは「1」から「8」の文字列（時限）
+- 値は配列で、[月曜日, 火曜日, 水曜日, 木曜日, 金曜日, 土曜日]の順
+- 空きコマは空文字列 `""` で表す
+- 授業がある場合は科目名を記入
+
+## 技術スタック
+
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- DaisyUI
+
+## 開発環境のセットアップ
+
+```bash
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動
+npm run dev
+
+# ビルド
+npm run build
+
+# プレビュー
+npm run preview
+```
+
+## ライセンス
+
+MIT License
