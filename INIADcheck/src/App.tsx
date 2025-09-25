@@ -1,10 +1,20 @@
 import { ThemeToggle } from './Thema'
 import { Footer } from './fotter'
 import { FileInput } from './FileInput'
-
+import { useTimetable } from './hooks/useTimetable'
+import { TimetableList } from './components/TimetableList'
+import { FreeSlotsDisplay } from './components/FreeSlotsDisplay'
 
 function App() {
-  {/* ここに書く関数を入れる */}
+  const {
+    timetables,
+    addTimetable,
+    removeTimetable,
+    clearAllTimetables,
+    findCommonFreeSlots
+  } = useTimetable();
+
+  const commonFreeSlots = findCommonFreeSlots();
 
   return (
     <>
@@ -13,7 +23,32 @@ function App() {
         <h1 className="text-2xl font-bold">INIADcheck</h1>
         <ThemeToggle />
       </div>
-        <FileInput/>
+      
+      <div className="container mx-auto px-4 py-8">
+        <div className="space-y-8">
+          <FileInput onFileSelect={addTimetable} />
+          
+          {timetables.length > 0 && (
+            <div className="flex justify-end">
+              <button
+                onClick={clearAllTimetables}
+                className="btn btn-warning btn-sm"
+              >
+                全て削除
+              </button>
+            </div>
+          )}
+          
+          <TimetableList
+            timetables={timetables}
+            onRemove={removeTimetable}
+          />
+          
+          {timetables.length > 1 && (
+            <FreeSlotsDisplay freeSlots={commonFreeSlots} />
+          )}
+        </div>
+      </div>
     </div>
     <Footer />
 
